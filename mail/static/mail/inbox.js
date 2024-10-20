@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#compose').addEventListener('click', compose_email);
 
   // By default, load the inbox
-  load_mailbox('inbox');
+  load_mailbox('sent')
 });
 
 function compose_email() {
@@ -21,7 +21,7 @@ function compose_email() {
   document.querySelector('#compose-subject').value = '';
   document.querySelector('#compose-body').value = '';
 
-  document.addEventListener('DOMContentLoaded', function() {
+  
     document.querySelector('form').onsubmit = function() {
       const body = document.querySelector("#compose-body").value;
       const subject = document.querySelector("#compose-subject").value;
@@ -35,39 +35,82 @@ function compose_email() {
         })
       })
       .then(response => response.json())
-      .then(result => {
-          // Print result
-          console.log(result);
-      });
+      .then(email => {
+          console.log("email sent",email);
+          
+      })
+      
     };
-});}
+    
+    
 
+  }
+  
 
-
- 
-  
-  
-  
- 
 
 
 function load_mailbox(mailbox) {
+  console.log(`Loading ${mailbox} mailbox`);
   
   // Show the mailbox and hide other views
   document.querySelector('#emails-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
+  
 
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
-  fetch('/emails/inbox')
-  .then(response => response.json())
-  .then(emails => {
-    // Print emails
-   console.log(emails);
+  fetch(`/emails/${mailbox}`)
+ .then(response => {
+  console.log("Response status:", response.status);
+  return response.json()})
+ .then(emails => {
+    console.log(`${mailbox} emails:`,emails);
+    if (emails.length === 0) {
+
+      document.querySelector('#emails-view').innerHTML += '<p>No emails to display.</p>';
+    }
+    emails.forEach(email => {
+      // Parse the JSON data if it's stored in the body
+      let emailData;
+      try {
+          emailData = JSON.parse(email.body);
+          sort(emailData);
+      } catch (error) {
+          // If parsing fails, use the email as is
+          emailData = email;
+      }
+      const emailElement = document.createElement('div');
+      emailElement.id = 'mydiv';
+      emailElement.style.color = "gris";
+      
+      if (mailbox =='inbox') {
+            emailElement.innerHTML = `
+                <p>from: ${emailData.sender}</p>
+                
+                <p>Subject: ${emailData.subject}</p>
+                <p> ${emailData.timestamp}</p>
+            `;
+          }
+        else if (mailbox =='sent') {
+            emailElement.innerHTML = `
+                <p>to: ${emailData.recipients}</p>
+                
+                <p>Subject: ${emailData.subject}</p>
+                <p> ${emailData.timestamp}</p>
+            `;}
+        
+        
+           
+            
+
+            // Add the email element to the emails view
+            document.querySelector('#emails-view').append(emailElement);
+        });
+        
+    });
+    
+  
 
     // ... do something else with emails ...
-});
-
-
-  
 }
+
