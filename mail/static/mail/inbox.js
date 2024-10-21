@@ -129,12 +129,12 @@ function display(event){
     // Print email
     console.log(email);
     document.querySelector('#display-email').innerHTML = `
-    <p > date : ${emailData.timestamp}</p>
-    <p>from: ${emailData.sender}</p>
+    <p > date : ${email.timestamp}</p>
+    <p>from: ${email.sender}</p>
     <p > to: ${email.recipients}</p>
-    <p > Subject: ${emailData.subject}</p>
-    <p > Body: ${emailData.body}</p>
-    <p > date : ${emailData.timestamp}</p>
+    <p > Subject: ${email.subject}</p>
+    <p > Body: ${email.body}</p>
+    <p > date : ${email.timestamp}</p>
     `;
     
 
