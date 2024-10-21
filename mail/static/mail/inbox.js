@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#compose').addEventListener('click', compose_email);
   document.querySelector('#emails-view').addEventListener('click', read_mail);
   document.querySelector('#emails-view').addEventListener('click', display);
+  document.querySelector('archive').addEventListener('click', archive);
   
 
   // By default, load the inbox
@@ -84,7 +85,7 @@ function load_mailbox(mailbox) {
                 <p>from: ${emailData.sender}</p>                
                 <p > Subject: ${emailData.subject}</p>
                 <p >${emailData.timestamp}</p>
-                <button> archive   </button>         `;
+                <button id ="archive"> archive  </button>         `;
           }
         else if (mailbox =='sent') {
             emailElement.innerHTML = `
@@ -145,3 +146,17 @@ function display(event){
     `;});
 
  }
+
+  function archive(event){
+    let emailId = parseInt(event.target.id);
+    const emailelement  = event.target.closest('.divas');
+    
+    fetch(`/emails/${emailId}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        archived: true
+      })
+    })
+     }
+
+  
