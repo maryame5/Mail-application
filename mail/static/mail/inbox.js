@@ -5,10 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
   document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
-
+  document.body.addEventListener('click', read_mail);
+  document.body.addEventListener('click', display);
+  
 
   // By default, load the inbox
-  load_mailbox('inbox');
+  load_mailbox('inbox')
 });
 
 function compose_email() {
@@ -16,7 +18,7 @@ function compose_email() {
   // Show compose view and hide other views
   document.querySelector('#emails-view').style.display = 'none';
   document.querySelector('#compose-view').style.display = 'block';
-  
+  document.querySelector('#display-email').style.display = 'none';
 
 
   // Clear out composition fields
@@ -51,7 +53,8 @@ function load_mailbox(mailbox) {
   // Show the mailbox and hide other views
   document.querySelector('#emails-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
-  
+  document.querySelector('#display-email').style.display = 'none';
+
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
   
@@ -107,21 +110,26 @@ function load_mailbox(mailbox) {
 
 function read_mail(event) {
     const emailId = event.target.id;
+    const emailelement  = event.target.closest('.divas');
     
     console.log('_________',array_email,'________')
     const email = array_email.find(email => email.id == parseInt(emailId)); 
-    console.log('Found email:');
+    console.log('Found email:', emailelement);
     if (email){
       email.read=true;
-     }}
+    emailelement.classList.add('reading'); }}
 
 
 
 
-function display(emailId){
+
+function display(event){
  
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#display-email').style.display = 'block';
+  const Id = event.target.id;
+  const emailelement  = event.target.closest('.divas');
+  let emailId = parseInt(Id);
   console.log(emailId);
   if (typeof(emailId)==Number) {
     console.log(emailId)
@@ -147,15 +155,3 @@ else{
   console.log(typeof(emailId));
   console.error('Invalid email ID:', emailId);
 }}
-
-
-document.body.addEventListener('click', function(event) {
-  const emailElement = event.target.closest('.divas');
-   console.log(emailElement);
-  if (emailElement) {
-      const emailId = parseInt(emailElement.id); // Get the email ID from the element's ID
-      markAsRead(emailId); // Call the function to mark as read
-      displayEmailDetails(emailId);
-      emailElement.classList.add('reading'); // Call the function to display email details
-  }
-});
