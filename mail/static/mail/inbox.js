@@ -128,8 +128,17 @@ function display(event){
  .then(email => {
     // Print email
     console.log(email);
+    document.querySelector('#display-email').innerHTML = `
+    <p > date : ${emailData.timestamp}</p>
+    <p>from: ${emailData.sender}</p>
+    <p > to: ${email.recipients}</p>
+    <p > Subject: ${emailData.subject}</p>
+    <p > Body: ${emailData.body}</p>
+    <p > date : ${emailData.timestamp}</p>
+    `;
+    
 
-    // ... do something else with email ...
+   
 });
 
 
