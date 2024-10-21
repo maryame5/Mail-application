@@ -83,8 +83,7 @@ function load_mailbox(mailbox) {
       } catch (error) {
           // If parsing fails, use the email as is
           emailData = email;
-          console.log('1',array_email);
-          
+         
 
       }
       const emailElement = document.createElement('div');
@@ -127,12 +126,12 @@ document.body.addEventListener('click', read_mail);
 function read_mail(event) {
   
     const emailId = event.target.id;
-    console.log(emailId);
+    
     const emaill = array_email.find(email =>{
       if( email.id === emailId){
     email.read = True;
     email.save;}})
-    if (emaill){
+    if (emaill.id){
       console.log(emaill);
       emaill.style.color="blue";
    }
