@@ -76,7 +76,7 @@ function load_mailbox(mailbox) {
       var emailData;
       array_email = [];
       try {
-          emailData = JSON.parse(email.body);
+          emailData = JSON.parse(email);
           array_email.push(emailData);
           console.log('2',array_email);
           sort(array_email);
@@ -84,6 +84,7 @@ function load_mailbox(mailbox) {
           // If parsing fails, use the email as is
           emailData = email;
           console.log('1',array_email);
+          array_email.push(emailData);
 
       }
       const emailElement = document.createElement('div');
