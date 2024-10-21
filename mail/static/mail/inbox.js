@@ -1,9 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
 
   // Use buttons to toggle between views
-  document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
-  document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
-  document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
+  document.querySelector('#inbox').addEventListener('click',(event) => {
+    event.preventDefault();
+    load_mailbox('inbox');});
+  document.querySelector('#sent').addEventListener('click', (event) => {
+    event.preventDefault();
+    load_mailbox('sent');});
+  document.querySelector('#archived').addEventListener('click', (event) => {
+    event.preventDefault();
+    load_mailbox('archived');});
   document.querySelector('#compose').addEventListener('click', compose_email);
   document.body.addEventListener('click', read_mail);
   document.body.addEventListener('click', display);
