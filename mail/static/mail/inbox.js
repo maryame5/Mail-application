@@ -72,19 +72,19 @@ function load_mailbox(mailbox) {
     }
     
     emails.forEach(email => {
+      array_email.push(email);
      
       var emailData;
-      array_email = [];
+      
       try {
-          emailData = json.parse(email);
-          array_email.push(emailData);
-          console.log('2',array_email);
+          emailData = json.parse(emailData);
+          
           sort(array_email);
       } catch (error) {
           // If parsing fails, use the email as is
           emailData = email;
           console.log('1',array_email);
-          array_email.push(email);
+          
 
       }
       const emailElement = document.createElement('div');
@@ -128,13 +128,14 @@ function read_mail(event) {
   
     const emailId = event.target.id;
     console.log(emailId);
-    console.log('4',array_email);
     const emaill = array_email.find(email =>{
       if( email.id === emailId){
     email.read = True;
     email.save;}})
     if (emaill){
-   emaill.color='gray';}
+      console.log(emaill);
+      emaill.style.color="blue";
+   }
     }}
       
   )
