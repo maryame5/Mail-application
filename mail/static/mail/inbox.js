@@ -83,6 +83,8 @@ function load_mailbox(mailbox) {
       } catch (error) {
           // If parsing fails, use the email as is
           emailData = email;
+          console.log('1',array_email);
+
       }
       const emailElement = document.createElement('div');
       emailElement.className="divas"
