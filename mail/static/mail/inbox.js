@@ -5,7 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
   document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
-  
+  document.body.addEventListener('click', read_mail);
+  document.body.addEventListener('click', display);
+
   // By default, load the inbox
   load_mailbox('inbox')
 });
@@ -15,6 +17,8 @@ function compose_email() {
   // Show compose view and hide other views
   document.querySelector('#emails-view').style.display = 'none';
   document.querySelector('#compose-view').style.display = 'block';
+  document.querySelector('#display-email').style.display = 'none';
+
 
   // Clear out composition fields
   document.querySelector('#compose-recipients').value = '';
@@ -43,9 +47,12 @@ let array_email=[] ;
 //function
 function load_mailbox(mailbox) {
   console.log(`Loading ${mailbox} mailbox`);
+
   // Show the mailbox and hide other views
   document.querySelector('#emails-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
+  document.querySelector('#display-email').style.display = 'none';
+
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
   fetch(`/emails/${mailbox}`)
@@ -92,11 +99,12 @@ function load_mailbox(mailbox) {
             
             document.querySelector('#emails-view').append(emailElement);
         });       
-    });}
+    })}
 
  //change the background when an email have been readed
-document.addEventListener('DOMContentLoaded', function() {
-document.body.addEventListener('click', read_mail);
+
+
+
 function read_mail(event) {
     const emailId = event.target.id;
     const emailelement  = event.target.closest('.divas');
@@ -106,5 +114,23 @@ function read_mail(event) {
     console.log('Found email:', emailelement);
     if (email){
       email.read=true;
-    emailelement.classList.add('reading'); }}})
+    emailelement.classList.add('reading'); }}
 
+
+function display(event){
+  document.querySelector('#emails-view').style.display = 'none';
+  document.querySelector('#compose-view').style.display = 'none';
+  document.querySelector('#display-email').style.display = 'block';
+  const emailId = event.target.id;
+  const emailelement  = event.target.closest('.divas');
+  fetch(`/emails/${emailId}`)
+ .then(response => response.json())
+ .then(email => {
+    // Print email
+    console.log(email);
+
+    // ... do something else with email ...
+});
+
+
+}
