@@ -1,13 +1,13 @@
 textarea {
     min-height: 400px;
 }
-#mydiv{
+.divas{
     border: 2px solid;
     border-color: #000000;
     display: flex;
     
 }
-#mydiv:hover{
+.divas:hover{
     background-color: rgb(192, 191, 189);
     border-color:rgb(209, 184, 135);
     

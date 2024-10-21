@@ -81,6 +81,7 @@ function load_mailbox(mailbox) {
           emailData = email;
       }
       const emailElement = document.createElement('div');
+      emailElement.className="divas"
       emailElement.id = 'mydiv'+i;
       i++;
      
@@ -117,7 +118,7 @@ function load_mailbox(mailbox) {
 document.addEventListener('DOMContentLoaded', function() {
 document.body.addEventListener('click', read_mail);
 function read_mail(event) {
-  if (event.target.id == 'mydiv') {
+  
     const emailId = event.target.id;
     console.log(emailId);
     const emaill = emailData.find(email =>{
@@ -127,5 +128,5 @@ function read_mail(event) {
    emaill.color='gray';
     }}
       
-  })
+  )
 
