@@ -108,7 +108,7 @@ function load_mailbox(mailbox) {
 function read_mail(event) {
     const emailId = event.target.id;
     const emailelement  = event.target.closest('.divas');
-    console.log(emailId);
+    
     console.log('_________',array_email,'________')
     const email = array_email.find(email => email.id == parseInt(emailId)); 
     console.log('Found email:', emailelement);
@@ -144,5 +144,6 @@ function display(event){
 });
 }
 else{
+  console.log(emailId);
   console.error('Invalid email ID:', emailId);
 }}
