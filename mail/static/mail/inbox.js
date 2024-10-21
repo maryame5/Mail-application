@@ -128,8 +128,9 @@ function display(event){
  
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#display-email').style.display = 'block';
-  const emailId = parseInt(event.target.id);
+  const Id = event.target.id;
   const emailelement  = event.target.closest('.divas');
+  let emailId = parseInt(Id);
   console.log(emailId);
   if (typeof(emailId)==Number) {
     console.log(emailId)
