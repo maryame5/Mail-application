@@ -131,6 +131,8 @@ function display(event){
   const emailelement  = event.target.closest('.divas');
   let emailId = parseInt(Id);
   console.log(emailId);
+  if (typeof(emailId)==Number) {
+    console.log(emailId)
   fetch(`/emails/${emailId}`)
  .then(response => response.json())
  .then(email => {
@@ -144,12 +146,12 @@ function display(event){
     <p > Body:  ${email.body}</p>
     <p > date :  ${email.timestamp}</p>
     `;
-    console.log(typeof(emailId));
-  console.error('Invalid email ID:', emailId);
-
+    
 
    
 });
 }
-
-  
+else{
+  console.log(typeof(emailId));
+  console.error('Invalid email ID:', emailId);
+}}
