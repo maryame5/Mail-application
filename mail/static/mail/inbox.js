@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
 
   // By default, load the inbox
-  load_mailbox('inbox')
+  load_mailbox('inbox');
 });
 
 function compose_email() {
@@ -63,7 +63,6 @@ function load_mailbox(mailbox) {
   console.log("Response status:", response.status);
   return response.json()})
  .then(emails => {
-    console.log(`${mailbox} emails:`,emails);
     if (emails.length === 0) {
       document.querySelector('#emails-view').innerHTML += '<p>No emails to display.</p>';
     }
