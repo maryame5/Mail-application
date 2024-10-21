@@ -18,6 +18,7 @@ function compose_email() {
   document.querySelector('#compose-view').style.display = 'block';
   
 
+
   // Clear out composition fields
   document.querySelector('#compose-recipients').value = '';
   document.querySelector('#compose-subject').value = '';
@@ -149,7 +150,8 @@ else{
 
 
 document.body.addEventListener('click', function(event) {
-  const emailElement = event.target.closest('.divas'); // Assuming '.divas' is the class for email elements
+  const emailElement = event.target.closest('.divas');
+   console.log(emailElement);
   if (emailElement) {
       const emailId = parseInt(emailElement.id); // Get the email ID from the element's ID
       markAsRead(emailId); // Call the function to mark as read
