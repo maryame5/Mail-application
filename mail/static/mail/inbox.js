@@ -118,7 +118,8 @@ function read_mail(event) {
           read: true
       })
     })
-    emailelement.classList.add('reading'); }
+    .then(
+    emailelement.classList.add('reading');) }
 
 
 
