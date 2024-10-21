@@ -84,7 +84,7 @@ function load_mailbox(mailbox) {
           // If parsing fails, use the email as is
           emailData = email;
           console.log('1',array_email);
-          array_email.push(emailData);
+          array_email.push(email);
 
       }
       const emailElement = document.createElement('div');
