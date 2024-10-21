@@ -73,7 +73,8 @@ function load_mailbox(mailbox) {
     
     emails.forEach(email => {
       // Parse the JSON data if it's stored in the body
-      let emailData;
+      var emailData;
+      array_email = [];
       try {
           emailData = JSON.parse(email.body);
           array_email.push(emailData);
