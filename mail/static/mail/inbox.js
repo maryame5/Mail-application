@@ -55,7 +55,7 @@ function load_mailbox(mailbox) {
 
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
-  fetch(`/emails/<str:mailbox>`)
+  fetch(`/emails/${mailbox}`)
  .then(response => {
   console.log("Response status:", response.status);
   return response.json()})
@@ -121,9 +121,10 @@ function display(event){
   document.querySelector('#emails-view').style.display = 'none';
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#display-email').style.display = 'block';
-  const email_id = parseInt(event.target.id);
+  const emailId = parseInt(event.target.id);
   const emailelement  = event.target.closest('.divas');
-  fetch(`/emails/<int:email_id>`)
+  if (!isNaN(emailId)) {
+  fetch(`/emails/${emailId}`)
  .then(response => response.json())
  .then(email => {
     // Print email
@@ -140,6 +141,7 @@ function display(event){
 
    
 });
-
-
 }
+else{
+  console.error('Invalid email ID:', emailId);
+}}
