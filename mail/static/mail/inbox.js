@@ -47,7 +47,7 @@ function compose_email() {
   }
   
 
-  var array_email=[] ;
+  let array_email=[] ;
 
 function load_mailbox(mailbox) {
   console.log(`Loading ${mailbox} mailbox`);
@@ -91,11 +91,11 @@ function load_mailbox(mailbox) {
       
       if (mailbox =='inbox') {
             emailElement.innerHTML = `
-                <p id = "myp1">from: ${emailData.sender}</p>
+                <p>from: ${emailData.sender}</p>
                 <br>
                 
-                <p id = "myp2"> Subject: ${emailData.subject}</p>
-                 <p id = "myp3">${emailData.timestamp}</p>
+                <p > Subject: ${emailData.subject}</p>
+                 <p >${emailData.timestamp}</p>
             `;
           }
         else if (mailbox =='sent') {
