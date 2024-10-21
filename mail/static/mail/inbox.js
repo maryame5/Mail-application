@@ -28,6 +28,7 @@ function compose_email() {
       const body = document.querySelector("#compose-body").value;
       const subject = document.querySelector("#compose-subject").value;
       const recipient = document.querySelector("#compose-recipients").value;
+
       fetch('/emails', {
         method: 'POST',
         body: JSON.stringify({
@@ -55,6 +56,8 @@ function load_mailbox(mailbox) {
 
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
+  list=['inbox','sent','archive'];
+  if (mailbox in list){
   fetch(`/emails/${mailbox}`)
  .then(response => {
   console.log("Response status:", response.status);
@@ -99,7 +102,7 @@ function load_mailbox(mailbox) {
             
             document.querySelector('#emails-view').append(emailElement);
         });       
-    })}
+    })}}
 
  //change the background when an email have been readed
 
@@ -122,13 +125,13 @@ function read_mail(event) {
 
 document.body.addEventListener('click', display);
 function display(event){
-  document.querySelector('#emails-view').style.display = 'none';
+ 
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#display-email').style.display = 'block';
   const emailId = parseInt(event.target.id);
   const emailelement  = event.target.closest('.divas');
   console.log(emailId);
-  if (!(emailId)) {
+  if (!typeof(emailId)==Number) {
     console.log(emailId)
   fetch(`/emails/${emailId}`)
  .then(response => response.json())
