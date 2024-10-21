@@ -131,8 +131,8 @@ function read_mail(event) {
       if( email.id === emailId){
     email.read = True;
     email.save;}})
-    if (emaill.id){
-      console.log(emaill);
+    if (emaill){
+      console.log(emaill.id);
       emaill.style.color="blue";
    }
     }}
