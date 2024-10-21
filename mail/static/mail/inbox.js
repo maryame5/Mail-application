@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#mydiv').addEventListener('click', read);
 
   // By default, load the inbox
-  load_mailbox('sent')
+  load_mailbox('inbox')
 });
 
 function compose_email() {
@@ -86,18 +86,18 @@ function load_mailbox(mailbox) {
       
       if (mailbox =='inbox') {
             emailElement.innerHTML = `
-                <p>from: ${emailData.sender}</p>
+                <p id = "myp1">from: ${emailData.sender}</p>
                 
-                <p>Subject: ${emailData.subject}</p>
-                <p> ${emailData.timestamp}</p>
+                <p id = "myp2">Subject: ${emailData.subject}</p>
+                 <<p id = "myp3">>${emailData.timestamp}</p>
             `;
           }
         else if (mailbox =='sent') {
             emailElement.innerHTML = `
-                <div>to: ${emailData.recipients}
+               <p id = "myp1"> to: ${emailData.recipients}</p>
                 
-                Subject: ${emailData.subject}
-                 ${emailData.timestamp}</div>
+               <p id = "myp2"> Subject: ${emailData.subject}</p>
+                <p id = "myp3"> ${emailData.timestamp}</p>
             `;}
         
             // Add the email element to the emails view
