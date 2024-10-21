@@ -56,6 +56,7 @@ function load_mailbox(mailbox) {
   document.querySelector('#emails-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
   
+  let array_email = [];
 
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
@@ -69,12 +70,13 @@ function load_mailbox(mailbox) {
 
       document.querySelector('#emails-view').innerHTML += '<p>No emails to display.</p>';
     }
-    let i=0;
+    
     emails.forEach(email => {
       // Parse the JSON data if it's stored in the body
-      var emailData;
+      let emailData;
       try {
           emailData = JSON.parse(email.body);
+          array_email.push(emailData);
           sort(emailData);
       } catch (error) {
           // If parsing fails, use the email as is
@@ -82,8 +84,8 @@ function load_mailbox(mailbox) {
       }
       const emailElement = document.createElement('div');
       emailElement.className="divas"
-      emailElement.id = 'mydiv'+i;
-      i++;
+      emailElement.id = emailData.id;
+      
      
       
       if (mailbox =='inbox') {
@@ -121,8 +123,8 @@ function read_mail(event) {
   
     const emailId = event.target.id;
     console.log(emailId);
-    let emailData = JSON.parse(email.body);
-    const emaill = emailData.find(email =>{
+    
+    const emaill = array_email.find(email =>{
       if( email.id === emailId){
     email.read = True;
     email.save;}})
