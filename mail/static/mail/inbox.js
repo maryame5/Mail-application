@@ -124,7 +124,7 @@ function load_mailbox(mailbox) {
 document.addEventListener('DOMContentLoaded', function() {
 document.body.addEventListener('click', read_mail);
 function read_mail(event) {
-  
+  const emailElement = event.target.closest('.email');
     const emailId = event.target.id;
     console.log(emailId);
     console.log('_________',array_email,'________')
@@ -134,9 +134,8 @@ function read_mail(event) {
     console.log('Found email:', email);
     if (email){
       email.read=true;
-      email.className="reading";
-   }
-    }}
+      emailElement.style.backgroundColor = "#f0f0f0";
+    }}}
       
   )
 
