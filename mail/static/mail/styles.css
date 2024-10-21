@@ -18,6 +18,7 @@ textarea {
     background-color: rgb(192, 191, 189);
 }
 p{
+    margin:auto ;
     margin-left: 20px;
-    margin:2em;
+   
 }

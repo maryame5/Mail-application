@@ -81,20 +81,16 @@ function load_mailbox(mailbox) {
       emailElement.id = emailData.id;
       if (mailbox =='inbox') {
             emailElement.innerHTML = `
-                <p>from: ${emailData.sender}</p>
-                <br>
-                
+                <p>from: ${emailData.sender}</p>                
                 <p > Subject: ${emailData.subject}</p>
-                 <p >${emailData.timestamp}</p>
-            `;
+                <p >${emailData.timestamp}</p>
+                <button> archive   </button>         `;
           }
         else if (mailbox =='sent') {
             emailElement.innerHTML = `
                <p > to: ${emailData.recipients}</p>
-               <br>
-                
                <p > Subject: ${emailData.subject}</p>
-                <p "> ${emailData.timestamp}</p>
+              <p "> ${emailData.timestamp}</p>
             `;}
         
             // Add the email element to the emails view
@@ -147,6 +143,5 @@ function display(event){
     <p > Body:  ${email.body}</p>
     <p > date :  ${email.timestamp}</p>
     `;});
-
 
  }
