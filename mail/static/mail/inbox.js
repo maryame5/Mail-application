@@ -127,7 +127,8 @@ function display(event){
   document.querySelector('#display-email').style.display = 'block';
   const emailId = parseInt(event.target.id);
   const emailelement  = event.target.closest('.divas');
-  if (!isNaN(emailId)) {
+  console.log(emailId);
+  if (!(emailId)) {
     console.log(emailId)
   fetch(`/emails/${emailId}`)
  .then(response => response.json())
