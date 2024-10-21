@@ -103,7 +103,7 @@ function load_mailbox(mailbox) {
             document.querySelector('#emails-view').append(emailElement);
         });       
     })}
-  
+
  //change the background when an email have been readed
 
 
@@ -133,9 +133,9 @@ function display(event){
   console.log(emailId);
   if (typeof(emailId)==Number) {
     console.log(emailId)
-   fetch(`/emails/${emailId}`)
-   .then(response => response.json())
-   .then(email => {
+  fetch(`/emails/${emailId}`)
+ .then(response => response.json())
+ .then(email => {
     // Print email
     console.log(email);
     document.querySelector('#display-email').innerHTML = `
@@ -145,11 +145,7 @@ function display(event){
     <p > Subject:  ${email.subject}</p>
     <p > Body:  ${email.body}</p>
     <p > date :  ${email.timestamp}</p>
-    `;
-    
-
-   
-});
+    `;});
 }
 else{
   console.log(typeof(emailId));
