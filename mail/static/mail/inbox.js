@@ -69,6 +69,7 @@ function load_mailbox(mailbox) {
 
       document.querySelector('#emails-view').innerHTML += '<p>No emails to display.</p>';
     }
+    let i=0;
     emails.forEach(email => {
       // Parse the JSON data if it's stored in the body
       var emailData;
@@ -80,7 +81,8 @@ function load_mailbox(mailbox) {
           emailData = email;
       }
       const emailElement = document.createElement('div');
-      emailElement.id = 'mydiv';
+      emailElement.id = 'mydiv'+i;
+      i++;
      
       
       if (mailbox =='inbox') {
