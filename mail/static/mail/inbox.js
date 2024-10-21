@@ -124,8 +124,10 @@ function load_mailbox(mailbox) {
 document.addEventListener('DOMContentLoaded', function() {
 document.body.addEventListener('click', read_mail);
 function read_mail(event) {
+  
 
     const emailId = event.target.id;
+    const emailelement = document.querySelector('#emailId');
     console.log(emailId);
     console.log('_________',array_email,'________')
 
@@ -134,7 +136,7 @@ function read_mail(event) {
     console.log('Found email:', email);
     if (email){
       email.read=true;
-      email.classList.add('reading');
+    emailelement.classList.add('reading');
       
     }}}
       
