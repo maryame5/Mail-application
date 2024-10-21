@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
   document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
-  document.querySelector('#mydiv').addEventListener('click', read);
+  document.querySelector('#mydiv').addEventListener('click', () => read_mail(id));
 
   // By default, load the inbox
   load_mailbox('inbox')
@@ -103,7 +103,9 @@ function load_mailbox(mailbox) {
             `;}
         
             // Add the email element to the emails view
-            
+            if(emailElement.read=True){
+              emailElement.style.color = 'gray';
+            }
             document.querySelector('#emails-view').append(emailElement);
         });
 
@@ -114,6 +116,26 @@ function load_mailbox(mailbox) {
 
     // ... do something else with emails ...
 }
-function read(){
+function read(id){
+ fetch(`/emails/${id}`)
+ .then(response => response.json())
+ .then(emails => {
+  emails.forEach(email => {
+    let emailData;
+      try {
+          emailData = JSON.parse(email.body);
+          sort(emailData);
+      } catch (error) {
+          // If parsing fails, use the email as is
+          emailData = email;
+      }
+      if(emailData.id ==id){
+        emailData.read=true;
+        
+      }})})
+
+
+  
+
 
 }
