@@ -47,7 +47,7 @@ function compose_email() {
   }
   
 
-  let array_email = [];
+  var array_email=[] ;
 
 function load_mailbox(mailbox) {
   console.log(`Loading ${mailbox} mailbox`);
@@ -129,7 +129,8 @@ function read_mail(event) {
       if( email.id === emailId){
     email.read = True;
     email.save;}})
-   emaill.color='gray';
+    if (emaill){
+   emaill.color='gray';}
     }}
       
   )
