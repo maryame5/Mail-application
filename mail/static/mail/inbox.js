@@ -126,6 +126,7 @@ function read_mail(event) {
 function display(event){ 
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#display-email').style.display = 'block';
+  document.querySelector('#emails-view').style.display = 'none';
   const Id = event.target.id;
   const emailelement  = event.target.closest('.divas');
   let emailId = parseInt(Id);
