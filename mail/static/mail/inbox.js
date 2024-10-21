@@ -123,16 +123,14 @@ function read_mail(event) {
 
 
 
-function display(event){
- 
+function display(event){ 
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#display-email').style.display = 'block';
   const Id = event.target.id;
   const emailelement  = event.target.closest('.divas');
   let emailId = parseInt(Id);
   console.log(emailId);
-  if (typeof(emailId)==Number) {
-    console.log(emailId)
+  
   fetch(`/emails/${emailId}`)
  .then(response => response.json())
  .then(email => {
@@ -146,8 +144,7 @@ function display(event){
     <p > Body:  ${email.body}</p>
     <p > date :  ${email.timestamp}</p>
     `;});
-}
-else{
+
+
   console.log(typeof(emailId));
-  console.error('Invalid email ID:', emailId);
-}}
+  console.error('Invalid email ID:', emailId);}
