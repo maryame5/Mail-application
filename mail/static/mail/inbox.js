@@ -57,7 +57,7 @@ function load_mailbox(mailbox) {
 
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
-  
+  if (typeof(mailbox)==String){
   fetch(`/emails/${mailbox}`)
  .then(response => {
   console.log("Response status:", response.status);
@@ -103,7 +103,7 @@ function load_mailbox(mailbox) {
             document.querySelector('#emails-view').append(emailElement);
         });       
     })}
-
+  }
  //change the background when an email have been readed
 
 
@@ -133,9 +133,9 @@ function display(event){
   console.log(emailId);
   if (typeof(emailId)==Number) {
     console.log(emailId)
-  fetch(`/emails/${emailId}`)
- .then(response => response.json())
- .then(email => {
+   fetch(`/emails/${emailId}`)
+   .then(response => response.json())
+   .then(email => {
     // Print email
     console.log(email);
     document.querySelector('#display-email').innerHTML = `
