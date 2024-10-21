@@ -20,9 +20,7 @@ function compose_email() {
   document.querySelector('#compose-recipients').value = '';
   document.querySelector('#compose-subject').value = '';
   document.querySelector('#compose-body').value = '';
-
-  
-    document.querySelector('form').onsubmit = function() {
+  document.querySelector('form').onsubmit = function() {
       const body = document.querySelector("#compose-body").value;
       const subject = document.querySelector("#compose-subject").value;
       const recipient = document.querySelector("#compose-recipients").value;
@@ -36,28 +34,18 @@ function compose_email() {
       })
       .then(response => response.json())
       .then(email => {
-          console.log("email sent",email);
-          
-      })
-      
-    };
-    
-    
+          console.log("email sent",email);  
+      })};}
 
-  }
-  
 
-  let array_email=[] ;
-
+//global variable
+let array_email=[] ;
+//function
 function load_mailbox(mailbox) {
   console.log(`Loading ${mailbox} mailbox`);
-  
   // Show the mailbox and hide other views
   document.querySelector('#emails-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
-  
-  
-
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
   fetch(`/emails/${mailbox}`)
@@ -67,31 +55,21 @@ function load_mailbox(mailbox) {
  .then(emails => {
     console.log(`${mailbox} emails:`,emails);
     if (emails.length === 0) {
-
       document.querySelector('#emails-view').innerHTML += '<p>No emails to display.</p>';
     }
-    
     emails.forEach(email => {
       array_email.push(email);
-     
       var emailData;
-      
       try {
-          emailData = json.parse(emailData);
-          
+          emailData = json.parse(emailData);  
           sort(array_email);
       } catch (error) {
           // If parsing fails, use the email as is
           emailData = email;
-         
-
       }
       const emailElement = document.createElement('div');
       emailElement.className="divas"
       emailElement.id = emailData.id;
-      
-     
-      
       if (mailbox =='inbox') {
             emailElement.innerHTML = `
                 <p>from: ${emailData.sender}</p>
@@ -113,32 +91,20 @@ function load_mailbox(mailbox) {
             // Add the email element to the emails view
             
             document.querySelector('#emails-view').append(emailElement);
-        });
+        });       
+    });}
 
-             
-    });
-    
-  
-
-}
+ //change the background when an email have been readed
 document.addEventListener('DOMContentLoaded', function() {
 document.body.addEventListener('click', read_mail);
 function read_mail(event) {
-  
-
     const emailId = event.target.id;
     const emailelement  = event.target.closest('.divas');
     console.log(emailId);
     console.log('_________',array_email,'________')
-
-    
     const email = array_email.find(email => email.id == parseInt(emailId)); 
     console.log('Found email:', emailelement);
     if (email){
       email.read=true;
-    emailelement.classList.add('reading');
-      
-    }}}
-      
-  )
+    emailelement.classList.add('reading'); }}})
 
