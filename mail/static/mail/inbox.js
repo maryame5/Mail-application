@@ -76,7 +76,7 @@ function load_mailbox(mailbox) {
       var emailData;
       array_email = [];
       try {
-          emailData = JSON.parse(email);
+          emailData = json.parse(email);
           array_email.push(emailData);
           console.log('2',array_email);
           sort(array_email);
@@ -116,8 +116,7 @@ function load_mailbox(mailbox) {
             document.querySelector('#emails-view').append(emailElement);
         });
 
-        console.log('3',array_email);
-        
+             
     });
     
   
