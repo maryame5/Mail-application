@@ -2,7 +2,18 @@ textarea {
     min-height: 400px;
 }
 #mydiv{
-    border: 2px solid;
+    border: 6px solid;
     border-color: #000;
+    min-width :500px;
+    min-height: 200px;
+    font-size: 2em;
+    display: flexbox;
+    
+
+    
+    
+}
+#mydiv:hover{
+    background-color: rgb(192, 191, 189);
     
 }

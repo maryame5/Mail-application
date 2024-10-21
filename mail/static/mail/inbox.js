@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
   document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
+  document.querySelector('#mydiv').addEventListener('click', read);
 
   // By default, load the inbox
   load_mailbox('sent')
@@ -81,7 +82,7 @@ function load_mailbox(mailbox) {
       }
       const emailElement = document.createElement('div');
       emailElement.id = 'mydiv';
-      emailElement.style.color = "gris";
+     
       
       if (mailbox =='inbox') {
             emailElement.innerHTML = `
@@ -93,19 +94,17 @@ function load_mailbox(mailbox) {
           }
         else if (mailbox =='sent') {
             emailElement.innerHTML = `
-                <p>to: ${emailData.recipients}</p>
+                <div>to: ${emailData.recipients}
                 
-                <p>Subject: ${emailData.subject}</p>
-                <p> ${emailData.timestamp}</p>
+                Subject: ${emailData.subject}
+                 ${emailData.timestamp}</div>
             `;}
         
-        
-           
-            
-
             // Add the email element to the emails view
+            
             document.querySelector('#emails-view').append(emailElement);
         });
+
         
     });
     
@@ -113,4 +112,6 @@ function load_mailbox(mailbox) {
 
     // ... do something else with emails ...
 }
+function read(){
 
+}
