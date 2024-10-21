@@ -117,7 +117,7 @@ document.body.addEventListener('click', read_mail);
 function read_mail(event) {
   if (event.target.id == 'mydiv') {
     const emailId = event.target.id;
-    const emaill = emails.find(email =>{
+    const emaill = emailData.find(email =>{
       if( email.id === emailId){
     email.read = True;
     email.save;}})
