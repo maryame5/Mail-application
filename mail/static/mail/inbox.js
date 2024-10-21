@@ -56,8 +56,7 @@ function load_mailbox(mailbox) {
 
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
-  list=['inbox','sent','archive'];
-  if (mailbox in list){
+  
   fetch(`/emails/${mailbox}`)
  .then(response => {
   console.log("Response status:", response.status);
@@ -102,7 +101,7 @@ function load_mailbox(mailbox) {
             
             document.querySelector('#emails-view').append(emailElement);
         });       
-    })}}
+    })}
 
  //change the background when an email have been readed
 
@@ -121,9 +120,10 @@ function read_mail(event) {
 
 
 
- document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
 
-document.body.addEventListener('click', display);
+document.body.addEventListener('click',() => display('int'));
+
 function display(event){
  
   document.querySelector('#compose-view').style.display = 'none';
@@ -131,7 +131,7 @@ function display(event){
   const emailId = parseInt(event.target.id);
   const emailelement  = event.target.closest('.divas');
   console.log(emailId);
-  if (!typeof(emailId)==Number) {
+  if (typeof(emailId)==Number) {
     console.log(emailId)
   fetch(`/emails/${emailId}`)
  .then(response => response.json())
@@ -139,12 +139,12 @@ function display(event){
     // Print email
     console.log(email);
     document.querySelector('#display-email').innerHTML = `
-    <p > date : ${email.timestamp}</p>
-    <p>from: ${email.sender}</p>
-    <p > to: ${email.recipients}</p>
-    <p > Subject: ${email.subject}</p>
-    <p > Body: ${email.body}</p>
-    <p > date : ${email.timestamp}</p>
+    <p > date :  ${email.timestamp}</p>
+    <p>from:  ${email.sender}</p>
+    <p > to:  ${email.recipients}</p>
+    <p > Subject:  ${email.subject}</p>
+    <p > Body:  ${email.body}</p>
+    <p > date :  ${email.timestamp}</p>
     `;
     
 
