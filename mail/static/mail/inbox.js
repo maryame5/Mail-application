@@ -111,7 +111,18 @@ function load_mailbox(mailbox) {
     
   
 
-    // ... do something else with emails ...
 }
-
+document.addEventListener('DOMContentLoaded', function() {
+document.body.addEventListener('click', read_mail);
+function read_mail(event) {
+  if (event.target.id == 'mydiv') {
+    const emailId = event.target.id;
+    const emaill = emails.find(email =>{
+      if( email.id === emailId){
+    email.read = True;
+    email.save;}})
+   emaill.color='gray';
+    }}
+      
+  })
 
