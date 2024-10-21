@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
   document.body.addEventListener('click', read_mail);
-  document.body.addEventListener('click', display);
+  
 
   // By default, load the inbox
   load_mailbox('inbox')
@@ -117,6 +117,10 @@ function read_mail(event) {
     emailelement.classList.add('reading'); }}
 
 
+
+ document.addEventListener('DOMContentLoaded', function() {
+
+document.body.addEventListener('click', display);
 function display(event){
   document.querySelector('#emails-view').style.display = 'none';
   document.querySelector('#compose-view').style.display = 'none';
@@ -144,6 +148,6 @@ function display(event){
 });
 }
 else{
-  console.log(emailId);
+  console.log(typeof(emailId));
   console.error('Invalid email ID:', emailId);
-}}
+}}})
