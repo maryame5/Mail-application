@@ -127,7 +127,7 @@ function read_mail(event) {
   
 
     const emailId = event.target.id;
-    const emailelement = document.getElementById(`#${emailId}`);
+    const emailelement = document.getElementById(`#${parseInt(emailId)}`);
     console.log(emailId);
     console.log('_________',array_email,'________')
 
