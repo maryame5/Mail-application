@@ -128,13 +128,10 @@ function read_mail(event) {
     const emailId = event.target.id;
     console.log(emailId);
     
-    const emaill = array_email.find(email =>{
-      if( email.id == parseInt(emailId)){
-    email.read = True;
-    email.save;}})
-    if (emaill){
-      console.log(emaill.id);
-      emaill.style.color="blue";
+    const email = array_email.find(email => email.id === emailId); 
+    console.log('Found email:', email);
+    if (email){
+      email.read=true;
    }
     }}
       
