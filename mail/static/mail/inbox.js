@@ -116,6 +116,8 @@ function load_mailbox(mailbox) {
 
     // ... do something else with emails ...
 }
+document.querySelector('#mydiv').addEventListener('click', () => read_mail(id));
+
 function read(id){
  fetch(`/emails/${id}`)
  .then(response => response.json())
