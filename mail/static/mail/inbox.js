@@ -122,7 +122,7 @@ function read_mail(event) {
 
 document.addEventListener('DOMContentLoaded', function() {
 
-document.body.addEventListener('click',() => display('int'));
+document.body.addEventListener('click',() => display());
 
 function display(event){
  
