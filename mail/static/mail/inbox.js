@@ -102,9 +102,7 @@ function load_mailbox(mailbox) {
             `;}
         
             // Add the email element to the emails view
-            if(emailElement.read=True){
-              emailElement.style.color = 'gray';
-            }
+            
             document.querySelector('#emails-view').append(emailElement);
         });
 
@@ -115,28 +113,5 @@ function load_mailbox(mailbox) {
 
     // ... do something else with emails ...
 }
-document.querySelector('#mydiv').addEventListener('click', () => read_mail(id));
-
-function read(id){
- fetch(`/emails/${id}`)
- .then(response => response.json())
- .then(emails => {
-  emails.forEach(email => {
-    let emailData;
-      try {
-          emailData = JSON.parse(email.body);
-          sort(emailData);
-      } catch (error) {
-          // If parsing fails, use the email as is
-          emailData = email;
-      }
-      if(emailData.id ==id){
-        emailData.read=true;
-        
-      }})})
 
 
-  
-
-
-}
