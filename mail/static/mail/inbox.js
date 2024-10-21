@@ -119,7 +119,7 @@ function read_mail(event) {
       })
     })
     .then(
-    emailelement.classList.add('reading');) }
+    emailelement.classList.add('reading')) }
 
 
 
