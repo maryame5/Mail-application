@@ -121,7 +121,7 @@ function display(event){
   document.querySelector('#emails-view').style.display = 'none';
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#display-email').style.display = 'block';
-  const emailId = event.target.id;
+  const emailId = parseInt(event.target.id);
   const emailelement  = event.target.closest('.divas');
   fetch(`/emails/${emailId}`)
  .then(response => response.json())
