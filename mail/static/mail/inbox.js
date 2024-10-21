@@ -108,15 +108,17 @@ function load_mailbox(mailbox) {
 
 
 function read_mail(event) {
-    const emailId = event.target.id;
+
+    let emailId = parseInt(event.target.id);
     const emailelement  = event.target.closest('.divas');
     
-    console.log('_________',array_email,'________')
-    const email = array_email.find(email => email.id == parseInt(emailId)); 
-    console.log('Found email:', emailelement);
-    if (email){
-      email.read=true;
-    emailelement.classList.add('reading'); }}
+    fetch(`/emails/${emailId}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+          read: true
+      })
+    })
+    emailelement.classList.add('reading'); }
 
 
 
@@ -146,5 +148,4 @@ function display(event){
     `;});
 
 
-  console.log(typeof(emailId));
-  console.error('Invalid email ID:', emailId);}
+ }
