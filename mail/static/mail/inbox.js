@@ -126,7 +126,7 @@ document.body.addEventListener('click', read_mail);
 function read_mail(event) {
   
     const emailId = event.target.id;
-    console.log(emailId)
+    console.log(emailId);
     
     const emaill = array_email.find(email =>{
       if( email.id == parseInt(emailId)){
