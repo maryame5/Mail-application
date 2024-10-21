@@ -121,6 +121,7 @@ function read_mail(event) {
   
     const emailId = event.target.id;
     console.log(emailId);
+    let emailData = JSON.parse(email.body);
     const emaill = emailData.find(email =>{
       if( email.id === emailId){
     email.read = True;
