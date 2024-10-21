@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#compose').addEventListener('click', compose_email);
   document.querySelector('#emails-view').addEventListener('click', read_mail);
   document.querySelector('#emails-view').addEventListener('click', display);
-  document.querySelector('archive').addEventListener('click', archive);
+  document.querySelector('button').addEventListener('click', archive);
   
 
   // By default, load the inbox
