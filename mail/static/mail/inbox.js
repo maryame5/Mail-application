@@ -103,11 +103,11 @@ function load_mailbox(mailbox) {
           }
         else if (mailbox =='sent') {
             emailElement.innerHTML = `
-               <p id = "myp1"> to: ${emailData.recipients}</p>
+               <p > to: ${emailData.recipients}</p>
                <br>
                 
-               <p id = "myp2"> Subject: ${emailData.subject}</p>
-                <p id = "myp3"> ${emailData.timestamp}</p>
+               <p > Subject: ${emailData.subject}</p>
+                <p "> ${emailData.timestamp}</p>
             `;}
         
             // Add the email element to the emails view
@@ -134,7 +134,8 @@ function read_mail(event) {
     console.log('Found email:', email);
     if (email){
       email.read=true;
-      emailId.style.backgroundColor = "#f0f0f0";
+      email.classList.add('reading');
+      
     }}}
       
   )
