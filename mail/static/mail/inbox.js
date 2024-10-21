@@ -72,13 +72,13 @@ function load_mailbox(mailbox) {
     }
     
     emails.forEach(email => {
-      // Parse the JSON data if it's stored in the body
+     
       var emailData;
       array_email = [];
       try {
           emailData = JSON.parse(email.body);
           array_email.push(emailData);
-          sort(emailData);
+          sort(array_email);
       } catch (error) {
           // If parsing fails, use the email as is
           emailData = email;
