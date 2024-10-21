@@ -47,7 +47,7 @@ function compose_email() {
   }
   
 
-
+  let array_email = [];
 
 function load_mailbox(mailbox) {
   console.log(`Loading ${mailbox} mailbox`);
@@ -56,7 +56,7 @@ function load_mailbox(mailbox) {
   document.querySelector('#emails-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
   
-  let array_email = [];
+  
 
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
@@ -123,7 +123,7 @@ function read_mail(event) {
   
     const emailId = event.target.id;
     console.log(emailId);
-    
+    console.log(array_email)
     const emaill = array_email.find(email =>{
       if( email.id === emailId){
     email.read = True;
