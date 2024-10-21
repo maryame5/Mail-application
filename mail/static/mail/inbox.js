@@ -78,6 +78,7 @@ function load_mailbox(mailbox) {
       try {
           emailData = JSON.parse(email.body);
           array_email.push(emailData);
+          console.log('2',array_email);
           sort(array_email);
       } catch (error) {
           // If parsing fails, use the email as is
@@ -112,6 +113,7 @@ function load_mailbox(mailbox) {
             document.querySelector('#emails-view').append(emailElement);
         });
 
+        console.log('3',array_email);
         
     });
     
@@ -124,7 +126,7 @@ function read_mail(event) {
   
     const emailId = event.target.id;
     console.log(emailId);
-    console.log(array_email)
+    console.log('4',array_email);
     const emaill = array_email.find(email =>{
       if( email.id === emailId){
     email.read = True;
