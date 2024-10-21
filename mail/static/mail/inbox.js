@@ -127,8 +127,10 @@ function read_mail(event) {
   
     const emailId = event.target.id;
     console.log(emailId);
+    console.log('_________',array_email,'________')
+
     
-    const email = array_email.find(email => email.id == emailId); 
+    const email = array_email.find(email => email.id == parseInt(emailId)); 
     console.log('Found email:', email);
     if (email){
       email.read=true;
