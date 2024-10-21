@@ -134,6 +134,7 @@ function read_mail(event) {
     console.log('Found email:', email);
     if (email){
       email.read=true;
+      email.style.color="gray";
    }
     }}
       
