@@ -87,14 +87,16 @@ function load_mailbox(mailbox) {
       if (mailbox =='inbox') {
             emailElement.innerHTML = `
                 <p id = "myp1">from: ${emailData.sender}</p>
+                <br>
                 
-                <p id = "myp2">Subject: ${emailData.subject}</p>
-                 <<p id = "myp3">>${emailData.timestamp}</p>
+                <p id = "myp2"> Subject: ${emailData.subject}</p>
+                 <p id = "myp3">${emailData.timestamp}</p>
             `;
           }
         else if (mailbox =='sent') {
             emailElement.innerHTML = `
                <p id = "myp1"> to: ${emailData.recipients}</p>
+               <br>
                 
                <p id = "myp2"> Subject: ${emailData.subject}</p>
                 <p id = "myp3"> ${emailData.timestamp}</p>

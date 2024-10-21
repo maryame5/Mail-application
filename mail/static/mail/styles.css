@@ -2,18 +2,21 @@ textarea {
     min-height: 400px;
 }
 #mydiv{
-    border: 6px solid;
-    border-color: #000;
-    min-width :500px;
-    min-height: 200px;
-    font-size: 2em;
+    border: 2px solid;
+    border-color: #000000;
     display: flex;
-    
-
-    
     
 }
 #mydiv:hover{
     background-color: rgb(192, 191, 189);
+    border-color:rgb(124, 123, 121);
     
 }
+#myp1 ,#myp2{
+    text-align: left;
+}
+#myp3{
+    text-align: right;
+
+}
+
