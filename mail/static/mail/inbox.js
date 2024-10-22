@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
   document.querySelector('#emails-view').addEventListener('click', read_mail);
-  document.querySelector('#emails-view').addEventListener('click', display);
-  document.querySelector('button').addEventListener('click', archive);
+  //document.querySelector('#emails-view').addEventListener('click', display);
+  document.querySelector('#archived').addEventListener('click', archive);
   
 
   // By default, load the inbox
@@ -80,12 +80,13 @@ function load_mailbox(mailbox) {
       const emailElement = document.createElement('div');
       emailElement.className="divas"
       emailElement.id = emailData.id;
+      emailElement.setAttribute('data-section', emailElement.id);
       if (mailbox =='inbox') {
             emailElement.innerHTML = `
                 <p>from: ${emailData.sender}</p>                
                 <p > Subject: ${emailData.subject}</p>
                 <p >${emailData.timestamp}</p>
-                <button id ="archive"> archive  </button>         `;
+                <button id ="archiveD"> archive  </button>         `;
           }
         else if (mailbox =='sent') {
             emailElement.innerHTML = `
@@ -93,6 +94,7 @@ function load_mailbox(mailbox) {
                <p > Subject: ${emailData.subject}</p>
               <p "> ${emailData.timestamp}</p>
             `;}
+          
         
             // Add the email element to the emails view
             
@@ -122,12 +124,12 @@ function read_mail(event) {
 
 
 
-function display(event){ 
+ /*function display(event){ 
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#display-email').style.display = 'block';
   document.querySelector('#emails-view').style.display = 'none';
   const Id = event.target.id;
-  const emailelement  = event.target.closest('.divas');
+   
   let emailId = parseInt(Id);
   console.log(emailId);
   
@@ -145,13 +147,42 @@ function display(event){
     <p > date :  ${email.timestamp}</p>
     `;});
 
+ }*/
+
+
+
+    function display(mailid) {
+                
+      // Find section text from server
+      fetch(`/emails/${mailid}`)
+      .then(response => response.text())
+      .then(email => {
+          // Log text and display on page
+          console.log(email);
+          document.querySelector('#display-email').innerHTML = `
+    <p > date :  ${email.timestamp}</p>
+    <p>from:  ${email.sender}</p>
+    <p > to:  ${email.recipients}</p>
+    <p > Subject:  ${email.subject}</p>
+    <p > Body:  ${email.body}</p>
+    <p > date :  ${email.timestamp}</p>
+    `;});
+
  }
+  
+
+  document.addEventListener('DOMContentLoaded', function() {
+      // Add button functionality
+      document.querySelectorAll('#divas').forEach(divas => {
+          divas.onclick = function() {
+              display(this.dataset.mailid);
+          };
+      });
+  });
 
   function archive(event){
     let emailId = parseInt(event.target.id);
-    const emailelement  = event.target.closest('.divas');
-    
-    fetch(`/emails/${emailId}`, {
+      fetch(`/emails/${emailId}`, {
       method: 'PUT',
       body: JSON.stringify({
         archived: true
