@@ -80,7 +80,7 @@ function load_mailbox(mailbox) {
       const emailElement = document.createElement('div');
       emailElement.className="divas"
       emailElement.id = emailData.id;
-      emailElement.setAttribute('data-section', emailElement.id);
+      emailElement.setAttribute('data-email', emailElement.id);
       if (mailbox =='inbox') {
             emailElement.innerHTML = `
                 <p>from: ${emailData.sender}</p>                
@@ -175,7 +175,7 @@ function read_mail(event) {
       // Add button functionality
       document.querySelectorAll('#divas').forEach(div => {
           div.onclick = function() {
-              display(this.dataset);
+              display(this.dataset.email);
           };
       });
   });
