@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
 
   // Use buttons to toggle between views
-  document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
-  document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
-  document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
+ // document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
+ // document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
+ // document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
-  document.querySelector('#emails-view').addEventListener('click', read_mail);
+ document.querySelector('#emails-view').addEventListener('click', read_mail);
   document.querySelector('#emails-view').addEventListener('click', display);
+  document.querySelector('#arch').addEventListener('click', archive);
 
   
 
@@ -86,7 +87,7 @@ function load_mailbox(mailbox) {
                 <p>from: ${emailData.sender}</p>                
                 <p > Subject: ${emailData.subject}</p>
                 <p >${emailData.timestamp}</p>
-                <button id ="archiveD"> archive  </button>         `;
+                <button id ="arch"> archive  </button>         `;
           }
         else if (mailbox =='sent') {
             emailElement.innerHTML = `
@@ -108,10 +109,10 @@ function load_mailbox(mailbox) {
 
 function read_mail(event) {
 
-    let emailId = parseInt(event.target.id);
+    let email_id = parseInt(event.target.id);
     const emailelement  = event.target.closest('.divas');
     
-    fetch(`/emails/${emailId}`, {
+    fetch(`/emails/${email_id}`, {
       method: 'PUT',
       body: JSON.stringify({
           read: true
@@ -151,9 +152,10 @@ function read_mail(event) {
 
  
 
-  function archive(email){
+  function archive(event){
+    let email_id = parseInt(event.target.id);
     
-      fetch(`/emails/${email}`, {
+      fetch(`/emails/${email_id}`, {
       method: 'PUT',
       body: JSON.stringify({
         archived: true
@@ -162,13 +164,24 @@ function read_mail(event) {
 
     
   }
+  window.onpopstate = function(event) {
+    console.log(event.state.section);
+    load_mailbox(event.state.section);
+}
 
   document.addEventListener('DOMContentLoaded', function() {
-      // Add button functionality
+      
       document.querySelectorAll('button').forEach(button => {
           button.onclick = function() {
-              archive(this.dataset.mail);
+            const email = this.dataset.section;
+            console.log('this dataset email',this.dataset.section);
+            history.pushState({emails: email}, "", `/emails/${email}`);
+              load_mailbox(email)
           };
       });
-  });
-  
+  ;
+    })
+
+
+
+
