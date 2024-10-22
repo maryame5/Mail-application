@@ -173,8 +173,8 @@ function read_mail(event) {
 
   document.addEventListener('DOMContentLoaded', function() {
       // Add button functionality
-      document.querySelectorAll('#divas').forEach(divas => {
-          divas.onclick = function() {
+      document.querySelectorAll('#divas').forEach(div => {
+          div.onclick = function() {
               display(this.dataset.mailid);
           };
       });
