@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
   document.querySelector('#emails-view').addEventListener('click', read_mail);
-  //document.querySelector('#emails-view').addEventListener('click', display);
-  document.querySelector('#archived').addEventListener('click', archive);
+  document.querySelector('#emails-view').addEventListener('click', display);
+
   
 
   // By default, load the inbox
@@ -80,7 +80,7 @@ function load_mailbox(mailbox) {
       const emailElement = document.createElement('div');
       emailElement.className="divas"
       emailElement.id = emailData.id;
-      emailElement.setAttribute('data-email', emailElement.id);
+      emailElement.setAttribute('data-section', emailElement.id);
       if (mailbox =='inbox') {
             emailElement.innerHTML = `
                 <p>from: ${emailData.sender}</p>                
@@ -124,7 +124,7 @@ function read_mail(event) {
 
 
 
- /*function display(event){ 
+ function display(event){ 
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#display-email').style.display = 'block';
   document.querySelector('#emails-view').style.display = 'none';
@@ -147,47 +147,28 @@ function read_mail(event) {
     <p > date :  ${email.timestamp}</p>
     `;});
 
- }*/
-
-
-
-    function display(mailid) {
-                
-      // Find section text from server
-      fetch(`/emails/${mailid}`)
-      .then(response => response.text())
-      .then(email => {
-          // Log text and display on page
-          console.log(email);
-          document.querySelector('#display-email').innerHTML = `
-    <p > date :  ${email.timestamp}</p>
-    <p>from:  ${email.sender}</p>
-    <p > to:  ${email.recipients}</p>
-    <p > Subject:  ${email.subject}</p>
-    <p > Body:  ${email.body}</p>
-    <p > date :  ${email.timestamp}</p>
-    `;});
-
  }
-  
 
-  document.addEventListener('DOMContentLoaded', function() {
-      // Add button functionality
-      document.querySelectorAll('#divas').forEach(div => {
-          div.onclick = function() {
-              display(this.dataset.email);
-          };
-      });
-  });
+ 
 
-  function archive(event){
-    let emailId = parseInt(event.target.id);
-      fetch(`/emails/${emailId}`, {
+  function archive(email){
+    
+      fetch(`/emails/${email}`, {
       method: 'PUT',
       body: JSON.stringify({
         archived: true
       })
     })
-     }
 
+    
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+      // Add button functionality
+      document.querySelectorAll('button').forEach(button => {
+          button.onclick = function() {
+              archive(this.dataset.mail);
+          };
+      });
+  });
   
