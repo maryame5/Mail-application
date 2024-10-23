@@ -24,5 +24,6 @@ p{
 }
 #archive{
     border: 2px solid;
+    display: flex;
     border-color: #cf1010;
 }
