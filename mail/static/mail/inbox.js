@@ -69,7 +69,7 @@ function load_mailbox(mailbox) {
   fetch(`/emails/${mailbox}`)
  .then(response => {
   console.log("Response status:", response.status);
-  return response.json()})
+ response.json()})
  .then(emails => {
     if (emails.length === 0) {
       document.querySelector('#emails-view').innerHTML += '<p>No emails to display.</p>';
@@ -144,12 +144,8 @@ function read_mail(event) {
   
   fetch(`/emails/${emailId}`)
   .then(response => {
-    // Check if the response is OK
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
-  })
+    console.log("Response status:", response.status);
+   response.json()})
  .then(email => {
     // Print email
     console.log(email);
