@@ -2,25 +2,19 @@ document.addEventListener('DOMContentLoaded', function() {
   load_mailbox('inbox');
 
    //Use buttons to toggle between views
- //document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
-  //document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
- //document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
+ document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
+  document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
+ document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
- document.querySelector('#emails-view').addEventListener('click', read_mail);
+ //document.querySelector('#emails-view').addEventListener('click', read_mail);
   document.querySelector('#emails-view').addEventListener('click', display);
- // document.querySelector('#archive').addEventListener('click', archive);
- document.querySelector('.btn btn-sm btn-outline-primary button').addEventListener('click', function() {
-    const email = this.dataset.section;
-    console.log('this dataset email',this.dataset.section);
-    history.pushState({emails: email}, "", `/emails/${email}`);
-      load_mailbox(email)
-  });
-});
-;
+  document.querySelector('#archive').addEventListener('click', archive);
+
   
 
   // By default, load the inbox
-  load_mailbox('inbox');
+  load_mailbox('inbox');})
+
 
 window.onpopstate = function(event) {
   console.log(event.state.section);
@@ -96,10 +90,10 @@ function load_mailbox(mailbox) {
       emailElement.setAttribute('data-section', emailElement.id);
       if (mailbox =='inbox') {
             emailElement.innerHTML = `
-                <div><p>from: ${emailData.sender}</p>                
+                <p>from: ${emailData.sender}</p>                
                 <p > Subject: ${emailData.subject}</p>
-                <p >${emailData.timestamp}</p><div>
-                <div id = "archive" ><button>archive </button>
+                <p >${emailData.timestamp}</p>
+                  <p id = "archive">archive </p>
                    `;
           }
         else if (mailbox =='sent') {
@@ -145,9 +139,17 @@ function read_mail(event) {
   const Id = event.target.id;
    
   let emailId = parseInt(Id);
+  const emailelement  = event.target.closest('.divas');
   console.log(emailId);
   
-  fetch(`/emails/${emailId}`)
+  fetch(`/emails/${emailId}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+        read: true
+    })
+  })
+  .then(
+  emailelement.classList.add('reading'))
  .then(response => response.json())
  .then(email => {
     // Print email
@@ -177,10 +179,7 @@ function read_mail(event) {
 
     
   }
-  window.onpopstate = function(event) {
-    console.log(event.state.section);
-    load_mailbox(event.state.section);
-}
+
 
   
       
