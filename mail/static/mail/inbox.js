@@ -148,7 +148,7 @@ function read_mail(event) {
         read: true
     })
   })
-  
+
   
  .then(response => response.json())
  .then(email => {
