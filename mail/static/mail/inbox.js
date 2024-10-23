@@ -148,12 +148,13 @@ function read_mail(event) {
         read: true
     })
   })
-  .then(
-  emailelement.classList.add('reading'))
+  
+  
  .then(response => response.json())
  .then(email => {
     // Print email
     console.log(email);
+    emailelement.classList.add('reading');
     document.querySelector('#display-email').innerHTML = `
     <p > date :  ${email.timestamp}</p>
     <p>from:  ${email.sender}</p>
