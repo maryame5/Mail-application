@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#compose').addEventListener('click', compose_email);
  document.querySelector('#emails-view').addEventListener('click', read_mail);
   document.querySelector('#emails-view').addEventListener('click', display);
-  document.querySelector('.archive').addEventListener('click', archive);
+ 
 
   
 
@@ -85,32 +85,45 @@ function load_mailbox(mailbox) {
           emailData = email;
       }
       const emailElement = document.createElement('div');
-      emailElement.className="divas"
+      emailElement.className="divdiv"
+      
       emailElement.id = emailData.id;
-      emailElement.setAttribute('data-section', emailElement.id);
+      
       if (mailbox =='inbox') {
             emailElement.innerHTML = `
             <div class ="divas" id="${emailElement.id}" >
                 <p>from: ${emailData.sender}</p>                
                 <p > Subject: ${emailData.subject}</p>
                 <p >${emailData.timestamp}</p> <div>
-                <div class ="archive" id="${emailElement.id}" >
-                  <button>archivee </button>
+                <button class="btn btn-primary" id="${emailElement.id}" onclick="archive(${emailData.id})">archive</button>
+                
+                
                    `;
           }
         else if (mailbox =='sent') {
             emailElement.innerHTML = `
+             <div class ="divas" id="${emailElement.id}" >
                <p > to: ${emailData.recipients}</p>
                <p > Subject: ${emailData.subject}</p>
-              <p "> ${emailData.timestamp}</p>
+              <p "> ${emailData.timestamp}</p></div>
             `;}
+          else if (mailbox=='archive'){
+            emailElement.innerHTML = `
+             <div class ="divas" id="${emailElement.id}" >
+               <p>from: ${emailData.sender}</p>
+               <p > Subject: ${emailData.subject}</p>
+              <p "> ${emailData.timestamp}</p></div>
+              <button class="btn btn-primary" id="${emailElement.id}" onclick="unarchive(${emailData.id})">unarchive</button>
+              
+            `;}
+          
           
         
             // Add the email element to the emails view
             
             document.querySelector('#emails-view').append(emailElement);
             console.log(array_email);
-        });       
+           });       
     })}
 
  //change the background when an email have been readed
@@ -129,7 +142,7 @@ function read_mail(event) {
       })})
     .then(
     emailelement.classList.add('reading'),
-  console.log("reading")) }
+     console.log("reading")) }
 
 
 
@@ -166,17 +179,28 @@ function read_mail(event) {
 
  
 
-  function archive(event){
-    console.log("start")
-    let email_id = parseInt(event.target.id);
-    
-      fetch(`/emails/${email_id}`, {
+  function archive(mail){
+    console.log("start")    
+      fetch(`/emails/${mail}`, {
       method: 'PUT',
       body: JSON.stringify({
         archived: true
       })
     })
-    .then(console.log(email_id,"archived"))
+    .then(console.log(mail,"archived"))
+
+    
+  }
+
+  function unarchive(mail){
+    console.log("stat")    
+      fetch(`/emails/${mail}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        archived: false
+      })
+    })
+    .then(console.log(mail,"unarchived"))
 
     
   }
