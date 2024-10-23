@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#compose').addEventListener('click', compose_email);
  //document.querySelector('#emails-view').addEventListener('click', read_mail);
   document.querySelector('#emails-view').addEventListener('click', display);
-  document.querySelector('#archive').addEventListener('click', archive);
+  document.querySelector('.archive').addEventListener('click', archive);
 
   
 
@@ -78,7 +78,7 @@ function load_mailbox(mailbox) {
       array_email.push(email);
       var emailData;
       try {
-          emailData = json.parse(emailData);  
+          emailData = JSON.parse(emailData);  
           sort(array_email);
       } catch (error) {
           // If parsing fails, use the email as is
@@ -93,7 +93,7 @@ function load_mailbox(mailbox) {
                 <p>from: ${emailData.sender}</p>                
                 <p > Subject: ${emailData.subject}</p>
                 <p >${emailData.timestamp}</p>
-                  <p id = "archive">archive </p>
+                  <button class = "archive" id=${emailData.id}>archive </button>
                    `;
           }
         else if (mailbox =='sent') {
@@ -142,19 +142,18 @@ function read_mail(event) {
   const emailelement  = event.target.closest('.divas');
   console.log(emailId);
   
-  fetch(`/emails/${emailId}`, {
-    method: 'PUT',
-    body: JSON.stringify({
-        read: true
-    })
+  fetch(`/emails/${emailId}`)
+  .then(response => {
+    // Check if the response is OK
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
   })
-
-  
- .then(response => response.json())
  .then(email => {
     // Print email
     console.log(email);
-    emailelement.classList.add('reading');
+    
     document.querySelector('#display-email').innerHTML = `
     <p > date :  ${email.timestamp}</p>
     <p>from:  ${email.sender}</p>

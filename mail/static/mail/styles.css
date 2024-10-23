@@ -22,7 +22,7 @@ p{
     margin-left: 20px;
    
 }
-#archive{
+.archive{
     border: 2px solid;
     display: flex;
     border-color: #cf1010;
