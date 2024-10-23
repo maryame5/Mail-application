@@ -69,7 +69,7 @@ function load_mailbox(mailbox) {
   fetch(`/emails/${mailbox}`)
  .then(response => {
   console.log("Response status:", response.status);
- response.json()})
+ return response.json()})
  .then(emails => {
     if (emails.length === 0) {
       document.querySelector('#emails-view').innerHTML += '<p>No emails to display.</p>';
@@ -93,7 +93,7 @@ function load_mailbox(mailbox) {
                 <p>from: ${emailData.sender}</p>                
                 <p > Subject: ${emailData.subject}</p>
                 <p >${emailData.timestamp}</p>
-                  <button class = "archive" id=${emailData.id}>archive </button>
+                  <button class = "archive" id="${emailData.id}">archive </button>
                    `;
           }
         else if (mailbox =='sent') {
@@ -145,7 +145,7 @@ function read_mail(event) {
   fetch(`/emails/${emailId}`)
   .then(response => {
     console.log("Response status:", response.status);
-   response.json()})
+  return response.json()})
  .then(email => {
     // Print email
     console.log(email);
@@ -172,6 +172,7 @@ function read_mail(event) {
         archived: true
       })
     })
+    .then(console.log(email_id,"archived"))
 
     
   }
