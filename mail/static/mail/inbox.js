@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#compose').addEventListener('click', compose_email);
  //document.querySelector('#emails-view').addEventListener('click', read_mail);
   document.querySelector('#emails-view').addEventListener('click', display);
-  document.querySelector('.archive').addEventListener('click', archive);
+  document.querySelector('#archive').addEventListener('click', archive);
 
   
 
@@ -93,7 +93,7 @@ function load_mailbox(mailbox) {
                 <p>from: ${emailData.sender}</p>                
                 <p > Subject: ${emailData.subject}</p>
                 <p >${emailData.timestamp}</p>
-                  <button class = "archive" id="${emailData.id}">archive </button>
+                  <button id = "archive" >archivee </button>
                    `;
           }
         else if (mailbox =='sent') {
@@ -107,6 +107,7 @@ function load_mailbox(mailbox) {
             // Add the email element to the emails view
             
             document.querySelector('#emails-view').append(emailElement);
+            console.log(array_email);
         });       
     })}
 
@@ -123,10 +124,10 @@ function read_mail(event) {
       method: 'PUT',
       body: JSON.stringify({
           read: true
-      })
-    })
+      })})
     .then(
-    emailelement.classList.add('reading')) }
+    emailelement.classList.add('reading'),
+  console.log("reading")) }
 
 
 
@@ -164,7 +165,7 @@ function read_mail(event) {
  
 
   function archive(event){
-    let email_id = parseInt(event.target.id);
+    let email_id = parseInt(event.target.parentNode.id);
     
       fetch(`/emails/${email_id}`, {
       method: 'PUT',
