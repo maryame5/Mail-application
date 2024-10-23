@@ -7,14 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#compose').addEventListener('click', compose_email);
  document.querySelector('#emails-view').addEventListener('click', read_mail);
   document.querySelector('#emails-view').addEventListener('click', display);
- // document.querySelector('#arch').addEventListener('click', archive);
-
-  
-
-  // By default, load the inbox
-  load_mailbox('inbox');
-});
-document.querySelector('button', button => {
+ // document.querySelector('#archive').addEventListener('click', archive);
+ document.querySelector('.btn btn-sm btn-outline-primary button').forEach( button => {
   button.onclick = function() {
     const email = this.dataset.section;
     console.log('this dataset email',this.dataset.section);
@@ -23,6 +17,16 @@ document.querySelector('button', button => {
   };
 });
 ;
+  
+
+  // By default, load the inbox
+  load_mailbox('inbox');
+});
+
+window.onpopstate = function(event) {
+  console.log(event.state.section);
+  load_mailbox(event.state.section);
+}
 
 function compose_email() {
 
