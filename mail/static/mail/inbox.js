@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
  document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
- //document.querySelector('#emails-view').addEventListener('click', read_mail);
+ document.querySelector('#emails-view').addEventListener('click', read_mail);
   document.querySelector('#emails-view').addEventListener('click', display);
-  document.querySelector('#archive').addEventListener('click', archive);
+  document.querySelector('.archive').addEventListener('click', archive);
 
   
 
@@ -90,10 +90,12 @@ function load_mailbox(mailbox) {
       emailElement.setAttribute('data-section', emailElement.id);
       if (mailbox =='inbox') {
             emailElement.innerHTML = `
+            <div class ="divas" id="${emailElement.id}" >
                 <p>from: ${emailData.sender}</p>                
                 <p > Subject: ${emailData.subject}</p>
-                <p >${emailData.timestamp}</p>
-                  <button id = "archive" >archivee </button>
+                <p >${emailData.timestamp}</p> <div>
+                <div class ="archive" id="${emailElement.id}" >
+                  <button>archivee </button>
                    `;
           }
         else if (mailbox =='sent') {
@@ -165,7 +167,8 @@ function read_mail(event) {
  
 
   function archive(event){
-    let email_id = parseInt(event.target.parentNode.id);
+    console.log("start")
+    let email_id = parseInt(event.target.id);
     
       fetch(`/emails/${email_id}`, {
       method: 'PUT',
