@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+  load_mailbox('inbox');
 
    //Use buttons to toggle between views
  //document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
@@ -8,20 +9,18 @@ document.addEventListener('DOMContentLoaded', function() {
  document.querySelector('#emails-view').addEventListener('click', read_mail);
   document.querySelector('#emails-view').addEventListener('click', display);
  // document.querySelector('#archive').addEventListener('click', archive);
- document.querySelector('.btn btn-sm btn-outline-primary button').forEach( button => {
-  button.onclick = function() {
+ document.querySelector('.btn btn-sm btn-outline-primary button').addEventListener('click', function() {
     const email = this.dataset.section;
     console.log('this dataset email',this.dataset.section);
     history.pushState({emails: email}, "", `/emails/${email}`);
       load_mailbox(email)
-  };
+  });
 });
 ;
   
 
   // By default, load the inbox
   load_mailbox('inbox');
-});
 
 window.onpopstate = function(event) {
   console.log(event.state.section);
@@ -97,10 +96,11 @@ function load_mailbox(mailbox) {
       emailElement.setAttribute('data-section', emailElement.id);
       if (mailbox =='inbox') {
             emailElement.innerHTML = `
-                <p>from: ${emailData.sender}</p>                
+                <div><p>from: ${emailData.sender}</p>                
                 <p > Subject: ${emailData.subject}</p>
-                <p >${emailData.timestamp}</p>
-                <div><button id ="archive"> archive  </button>   </div>      `;
+                <p >${emailData.timestamp}</p><div>
+                <div id = "archive" ><button>archive </button>
+                   `;
           }
         else if (mailbox =='sent') {
             emailElement.innerHTML = `
