@@ -1,11 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
-  load_mailbox('inbox');
+  
 
    //Use buttons to toggle between views
  document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
   document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
  document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
-  document.querySelector('#compose').addEventListener('click', compose_email);
+  document.querySelector('#compose').addEventListener('click', ()=>
+    compose_email(),
+  load_mailbox('sent')
+);
  document.querySelector('#emails-view').addEventListener('click', read_mail);
   document.querySelector('#emails-view').addEventListener('click', display);
  
@@ -13,13 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
   
 
   // By default, load the inbox
-  load_mailbox('inbox');})
+  })
 
 
-window.onpopstate = function(event) {
-  console.log(event.state.section);
-  load_mailbox(event.state.section);
-}
+
 
 function compose_email() {
 
@@ -173,6 +173,8 @@ function read_mail(event) {
     <p > Subject:  ${email.subject}</p>
     <p > Body:  ${email.body}</p>
     <p > date :  ${email.timestamp}</p>
+    <button class="btn btn-primary" id="${email}" onclick="reply(${email})">reply</button>
+
     `;});
 
  }
@@ -204,6 +206,37 @@ function read_mail(event) {
 
     
   }
+
+
+  function reply(mail){
+
+    document.querySelector('#emails-view').style.display = 'none';
+    document.querySelector('#compose-view').style.display = 'block';
+    document.querySelector('#display-email').style.display = 'none';
+  
+  
+    // Clear out composition fields
+    document.querySelector('#compose-recipients').value = mail.sender;
+    document.querySelector('#compose-subject').value = `re: ${mail.subject}`;
+    document.querySelector('#compose-body').value = `on ${mail.timestamp}` ;
+    document.querySelector('form').onsubmit = function() {
+      const body = document.querySelector("#compose-body").value;
+      const subject = document.querySelector("#compose-subject").value;
+      const recipient = document.querySelector("#compose-recipients").value;
+
+      fetch('/emails', {
+        method: 'POST',
+        body: JSON.stringify({
+            recipients: recipient,
+            subject: subject,
+            body: body
+        })
+      })
+      .then(response => response.json())
+      .then(email => {
+          console.log("email sent reply",email);  
+      })};}
+  
 
 
   
