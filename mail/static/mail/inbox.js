@@ -1,19 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-  // Use buttons to toggle between views
- // document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
- // document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
- // document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
+   //Use buttons to toggle between views
+ //document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
+  //document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
+ //document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
  document.querySelector('#emails-view').addEventListener('click', read_mail);
   document.querySelector('#emails-view').addEventListener('click', display);
-  document.querySelector('#arch').addEventListener('click', archive);
+ // document.querySelector('#arch').addEventListener('click', archive);
 
   
 
   // By default, load the inbox
   load_mailbox('inbox');
 });
+document.querySelector('button', button => {
+  button.onclick = function() {
+    const email = this.dataset.section;
+    console.log('this dataset email',this.dataset.section);
+    history.pushState({emails: email}, "", `/emails/${email}`);
+      load_mailbox(email)
+  };
+});
+;
 
 function compose_email() {
 
@@ -87,7 +96,7 @@ function load_mailbox(mailbox) {
                 <p>from: ${emailData.sender}</p>                
                 <p > Subject: ${emailData.subject}</p>
                 <p >${emailData.timestamp}</p>
-                <button id ="arch"> archive  </button>         `;
+                <div><button id ="archive"> archive  </button>   </div>      `;
           }
         else if (mailbox =='sent') {
             emailElement.innerHTML = `
@@ -169,18 +178,9 @@ function read_mail(event) {
     load_mailbox(event.state.section);
 }
 
-  document.addEventListener('DOMContentLoaded', function() {
+  
       
-      document.querySelectorAll('button').forEach(button => {
-          button.onclick = function() {
-            const email = this.dataset.section;
-            console.log('this dataset email',this.dataset.section);
-            history.pushState({emails: email}, "", `/emails/${email}`);
-              load_mailbox(email)
-          };
-      });
-  ;
-    })
+     
 
 
 
