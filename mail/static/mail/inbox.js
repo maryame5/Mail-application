@@ -85,7 +85,7 @@ function load_mailbox(mailbox) {
           emailData = email;
       }
       const emailElement = document.createElement('div');
-      emailElement.className="divdiv"
+      emailElement.className="divdiv";
       
       emailElement.id = emailData.id;
       
@@ -95,7 +95,7 @@ function load_mailbox(mailbox) {
                 <p>from: ${emailData.sender}</p>                
                 <p > Subject: ${emailData.subject}</p>
                 <p >${emailData.timestamp}</p> <div>
-                <button class="btn btn-primary" id="${emailElement.id}" onclick="archive(${emailData.id})">archive</button>
+                <button class="btn btn-primary" id="${emailElement.id}" onclick="event.stopPropagation(); archive(${emailData.id}) ">archive</button>
                 
                 
                    `;
@@ -112,8 +112,8 @@ function load_mailbox(mailbox) {
              <div class ="divas" id="${emailElement.id}" >
                <p>from: ${emailData.sender}</p>
                <p > Subject: ${emailData.subject}</p>
-              <p "> ${emailData.timestamp}</p></div>
-              <button class="btn btn-primary" id="${emailElement.id}" onclick="unarchive(${emailData.id})">unarchive</button>
+              <p> ${emailData.timestamp}</p></div>
+              <button class="btn btn-primary" id="${emailElement.id}" onclick="event.stopPropagation(); unarchive(${emailData.id});load_mailbox('archive');">unarchive</button>
               
             `;}
           
@@ -122,7 +122,6 @@ function load_mailbox(mailbox) {
             // Add the email element to the emails view
             
             document.querySelector('#emails-view').append(emailElement);
-            console.log(array_email);
            });       
     })}
 
@@ -189,7 +188,10 @@ function read_mail(event) {
         archived: true
       })
     })
-    .then(console.log(mail,"archived"))
+    .then( response => {console.log(mail,"archived");
+    load_mailbox('inbox');}
+    )
+
 
     
   }
@@ -222,8 +224,12 @@ function read_mail(event) {
   
     // Clear out composition fields
     document.querySelector('#compose-recipients').value = mail.sender;
-    document.querySelector('#compose-subject').value = `re: ${mail.subject}`;
-    document.querySelector('#compose-body').value = `on ${mail.timestamp}  ${mail.sender} wrote : ${mail.body} <br>` ;})
+    if (mail.subject.toLowerCase().startsWith("re: ")) {
+      document.querySelector('#compose-subject').value = mail.subject;}
+    else{
+    document.querySelector('#compose-subject').value = `re: ${mail.subject}`;}
+    document.querySelector('#compose-body').value = `on ${mail.timestamp}  ${mail.sender} wrote : \n${mail.body} ;\n
+    reply : ` ;})
     document.querySelector('form').onsubmit = function() {
       const body = document.querySelector("#compose-body").value;
       const subject = document.querySelector("#compose-subject").value;
