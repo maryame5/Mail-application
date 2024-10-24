@@ -173,7 +173,7 @@ function read_mail(event) {
     <p > Subject:  ${email.subject}</p>
     <p > Body:  ${email.body}</p>
     <p > date :  ${email.timestamp}</p>
-    <button class="btn btn-primary" id="${email}" onclick="reply(${email})">reply</button>
+    <button class="btn btn-primary" id="${email.id}" onclick="reply(${email.id})">reply</button>
 
     `;});
 
@@ -213,12 +213,17 @@ function read_mail(event) {
     document.querySelector('#emails-view').style.display = 'none';
     document.querySelector('#compose-view').style.display = 'block';
     document.querySelector('#display-email').style.display = 'none';
+    fetch(`/emails/${mail}`)
+  .then(response => {
+    console.log("Response status:", response.status);
+  return response.json()})
+   .then(mail => {
   
   
     // Clear out composition fields
     document.querySelector('#compose-recipients').value = mail.sender;
     document.querySelector('#compose-subject').value = `re: ${mail.subject}`;
-    document.querySelector('#compose-body').value = `on ${mail.timestamp}` ;
+    document.querySelector('#compose-body').value = `on ${mail.timestamp}  ${mail.sender} wrote : ${mail.body} <br>` ;})
     document.querySelector('form').onsubmit = function() {
       const body = document.querySelector("#compose-body").value;
       const subject = document.querySelector("#compose-subject").value;
