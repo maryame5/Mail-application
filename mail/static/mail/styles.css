@@ -1,12 +1,13 @@
 textarea {
     min-height: 400px;
+
 }
 .divas{
     border: 2px solid;
     border-color: #000000;
-   
     display: flex;
-    height: 40px;
+    flex-direction: column;
+    
     
 }
 .divdiv{
@@ -28,4 +29,10 @@ p{
     margin:auto ;
     margin-left: 20px;
    
+}
+.archive{
+    background-color: rgb(214, 183, 120);
+    border: 2px solid;
+    border-color: #dfbf0b;
+
 }

@@ -162,7 +162,7 @@ function read_mail(event) {
     <p > Subject:  ${email.subject}</p>
     <p > Body:  ${email.body}</p>
     <p > date :  ${email.timestamp}</p>
-    <button class="btn btn-primary" id="${email.id}" onclick="reply(${email.id})">reply</button>
+    <button class="archive" id="${email.id}" onclick="reply(${email.id})">reply</button>
 
     `;});
 
