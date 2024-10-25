@@ -2,8 +2,7 @@ textarea {
     min-height: 400px;
 }
 .divas{
-    border: 2px solid;
-    border-color: #000000;
+    
     display: flex;
     width: 1000px;
     height: 40px;
