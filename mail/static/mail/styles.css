@@ -9,6 +9,14 @@ textarea {
     height: 40px;
     
 }
+.divdiv{
+    border: 2px solid;
+    border-color: #000000;
+    display: flex;
+    width: 1000px;
+    height: 40px;
+    
+}
 .divas:hover{
     background-color: rgb(192, 191, 189);
     border-color:rgb(209, 184, 135);
