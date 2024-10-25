@@ -17,10 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // By default, load the inbox
   })
-
-
-
-
 function compose_email() {
 
   // Show compose view and hide other views
