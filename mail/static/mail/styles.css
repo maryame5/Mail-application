@@ -4,7 +4,7 @@ textarea {
 .divas{
     border: 2px solid;
     border-color: #000000;
-    width: 1200px;
+   
     display: flex;
     height: 40px;
     
@@ -21,7 +21,7 @@ textarea {
 }
 .reading{
     background-color: rgb(192, 191, 189);
-    width: 1000px;
+    
     height: 40px;
 }
 p{
