@@ -32,11 +32,3 @@ p{
     margin-left: 20px;
    
 }
-.archive{
-    border: 4px solid;
-    display: flex;
-    border-color: #cf1010;
-}
-.archive:hover{
-    background-color: rgb(231, 160, 16);
-}
