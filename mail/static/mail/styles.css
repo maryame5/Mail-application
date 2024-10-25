@@ -2,7 +2,8 @@ textarea {
     min-height: 400px;
 }
 .divas{
-    
+    border: 2px solid;
+    border-color: #000000;
     display: flex;
     
     height: 40px;
@@ -17,8 +18,8 @@ textarea {
     
 }
 .divas:hover{
-    background-color: rgb(192, 191, 189);
-    border-color:rgb(209, 184, 135);
+    background-color: rgb(229, 206, 160);
+    border-color:rgb(218, 174, 88);
     
 }
 .reading{
