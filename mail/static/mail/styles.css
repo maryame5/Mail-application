@@ -16,6 +16,8 @@ textarea {
 }
 .reading{
     background-color: rgb(192, 191, 189);
+    width: 1000px;
+    height: 40px;
 }
 p{
     margin:auto ;

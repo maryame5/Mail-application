@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {
-  
 
+
+document.addEventListener('DOMContentLoaded', function() {
    //Use buttons to toggle between views
  document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
   document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
@@ -10,12 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
   load_mailbox('sent')
 );
  document.querySelector('#emails-view').addEventListener('click', read_mail);
-  document.querySelector('#emails-view').addEventListener('click', display);
- 
-
-  
-
-  // By default, load the inbox
+  document.querySelector('#emails-view').addEventListener('click', display);  
   })
 function compose_email() {
 
@@ -92,8 +87,6 @@ function load_mailbox(mailbox) {
                 <p > Subject: ${emailData.subject}</p>
                 <p >${emailData.timestamp}</p> <div>
                 <button class="btn btn-primary" id="${emailElement.id}" onclick="event.stopPropagation(); archive(${emailData.id}) ">archive</button>
-                
-                
                    `;
           }
         else if (mailbox =='sent') {
@@ -108,13 +101,12 @@ function load_mailbox(mailbox) {
              <div class ="divas" id="${emailElement.id}" >
                <p>from: ${emailData.sender}</p>
                <p > Subject: ${emailData.subject}</p>
-              <p> ${emailData.timestamp}</p></div>
-              <button class="btn btn-primary" id="${emailElement.id}" onclick="event.stopPropagation(); unarchive(${emailData.id});load_mailbox('archive');">unarchive</button>
-              
+              <p> ${emailData.timestamp}</p>
+              <button class="btn btn-primary" id="${emailElement.id}" onclick="event.stopPropagation(); unarchive(${emailData.id})">unarchive</button>
+              </div>
             `;}
-          
-          
-        
+            if (email.read) {
+              emailElement.classList.add('reading');}
             // Add the email element to the emails view
             
             document.querySelector('#emails-view').append(emailElement);
@@ -123,9 +115,10 @@ function load_mailbox(mailbox) {
 
  //change the background when an email have been readed
 
-
+ 
 
 function read_mail(event) {
+ 
 
     let email_id = parseInt(event.target.id);
     const emailelement  = event.target.closest('.divas');
@@ -135,9 +128,10 @@ function read_mail(event) {
       body: JSON.stringify({
           read: true
       })})
-    .then(
-    emailelement.classList.add('reading'),
-     console.log("reading")) }
+    .then(() => {
+   
+    emailelement.classList.add('reading');
+     console.log("reading");}) }
 
 
 
@@ -200,10 +194,12 @@ function read_mail(event) {
         archived: false
       })
     })
-    .then(console.log(mail,"unarchived"))
-
-    
+    .then(response => {console.log(mail,"unarchived");
+      load_mailbox('archive');}
+    ) 
   }
+  
+
 
 
   function reply(mail){
