@@ -4,16 +4,14 @@ textarea {
 .divas{
     border: 2px solid;
     border-color: #000000;
+    width: 1200px;
     display: flex;
     height: 40px;
     
 }
 .divdiv{
     border: 2px solid;
-    border-color: #000000;
-    display: flex;
-    
-    height: 40px;
+    border-color: #1f224b;
     
 }
 .divas:hover{
