@@ -86,7 +86,7 @@ function load_mailbox(mailbox) {
                 <p>from: ${emailData.sender}</p>                
                 <p > Subject: ${emailData.subject}</p>
                 <p >${emailData.timestamp}</p> <div>
-                <button class="btn btn-primary" id="${emailElement.id}" onclick="event.stopPropagation(); archive(${emailData.id}) ">archive</button>
+                <button class="archive" id="${emailElement.id}" onclick="event.stopPropagation(); archive(${emailData.id}) ">archive</button>
                    `;
           }
         else if (mailbox =='sent') {
@@ -102,7 +102,7 @@ function load_mailbox(mailbox) {
                <p>from: ${emailData.sender}</p>
                <p > Subject: ${emailData.subject}</p>
               <p> ${emailData.timestamp}</p>
-              <button class="btn btn-primary" id="${emailElement.id}" onclick="event.stopPropagation(); unarchive(${emailData.id})">unarchive</button>
+              <button class="archive" id="${emailElement.id}" onclick="event.stopPropagation(); unarchive(${emailData.id})">unarchive</button>
               </div>
             `;}
             if (email.read) {
