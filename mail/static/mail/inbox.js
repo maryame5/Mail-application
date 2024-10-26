@@ -91,7 +91,7 @@ function load_mailbox(mailbox) {
           }
         else if (mailbox =='sent') {
             emailElement.innerHTML = `
-             <div class ="divas" id="${emailElement.id}" >
+             <div  id="${emailElement.id}" >
                <p > to: ${emailData.recipients}</p>
                <p > Subject: ${emailData.subject}</p>
               <p "> ${emailData.timestamp}</p></div>

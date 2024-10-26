@@ -3,7 +3,7 @@ textarea {
 
 }
 .divas{
-    border: 2px solid;
+    border: 1px solid;
     border-color: #000000;
     display: flex;
     
@@ -11,7 +11,7 @@ textarea {
     
 }
 .divdiv{
-    border: 2px solid;
+    border: 1px solid;
     border-color: #1f224b;
     
 }
@@ -23,7 +23,7 @@ textarea {
 .reading{
     background-color: rgb(192, 191, 189);
     
-    height: 40px;
+   
 }
 p{
     margin:auto ;
@@ -32,7 +32,7 @@ p{
 }
 .archive{
     background-color: rgb(214, 183, 120);
-    border: 2px solid;
+    border: 1px solid;
     border-color: #dfbf0b;
 
 }
