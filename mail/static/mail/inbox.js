@@ -161,7 +161,6 @@ function read_mail(event) {
     <p > to:  ${email.recipients}</p>
     <p > Subject:  ${email.subject}</p>
     <p > Body:  ${email.body}</p>
-    <p > date :  ${email.timestamp}</p>
     <button class="archive" id="${email.id}" onclick="reply(${email.id})">reply</button>
 
     `;});
@@ -195,7 +194,7 @@ function read_mail(event) {
       })
     })
     .then(response => {console.log(mail,"unarchived");
-      load_mailbox('archive');}
+      load_mailbox('inbox');}
     ) 
   }
   
